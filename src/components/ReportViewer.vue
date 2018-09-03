@@ -1,6 +1,11 @@
 <template>
-  <div class="Report-viewer">
-    <div
+  <div class="report-viewer">
+    <content-block
+      v-for="report in reversedReports"
+      v-bind:key="report.id"
+      v-bind:report="report"
+    ></content-block>
+    <!-- <div
       class="previous-report"
       v-for="report in reversedReports"
       v-bind:key="report.id"
@@ -17,11 +22,12 @@
       <div class="report-opinion">
         {{ report.opinion }}
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+import ContentBlock from '@/components/ReportViewerContentBlock';
 export default {
   name: 'ReportViewer',
   props: [
@@ -31,6 +37,9 @@ export default {
     reversedReports () {
       return this.reports.slice().reverse();
     },
+  },
+  components: {
+    ContentBlock,
   },
 };
 </script>
