@@ -9,9 +9,12 @@
         'satisfied': isSatisfied,
         'above': isAbove
       }"
-      v-bind:style="mainStyle"
+      v-bind:style="progress"
     ></span>
-    <span class="gradient"></span>
+    <span
+      class="above-gradient"
+      v-bind:style="progress"
+    ></span>
   </div>
 </template>
 
@@ -26,7 +29,7 @@ export default {
     };
   },
   computed: {
-    mainStyle () {
+    progress () {
       return {
         '--progress': this.value / 200,
       };
@@ -48,11 +51,11 @@ export default {
 
 <style scoped>
   .progress {
-    display: block;
+    display: inline-block;
     width: 100%;
     height: 5px;
-    margin: 10px 5px;
     position: relative;
+    z-index: 0;
   }
 
   .below {
@@ -62,7 +65,7 @@ export default {
   .base-below {
     display: inline-block;
     width: calc((100% - 45px) * 0.25);
-    height: var(--progress-height);
+    height: 100%;
     background-color: var(--progress-below-light-color);
     position: absolute;
     z-index: 0;
@@ -71,7 +74,7 @@ export default {
   .base-satisfied {
     display: inline-block;
     width: calc((100% - 45px) * 0.75);
-    height: var(--progress-height);
+    height: 100%;
     background-color: var(--progress-satisfied-light-color);
     position: absolute;
     left: calc((100% - 45px) * 0.25);
@@ -83,25 +86,28 @@ export default {
   }
 
   .above {
-    background: var(--progress-above-color);
+    background-color: var(--progress-above-color);
   }
 
   .main {
     display: inline-block;
     width: calc((100% - 45px) * var(--progress));
-    max-width: 100%;
-    height: var(--progress-height);
+    max-width: calc(100% - 45px);
+    height: 100%;
     position: absolute;
     z-index: 1;
   }
 
-  .gradient {
-    display: inline-block;
-    width: 45px;
-    height: var(--progress-height);
-    background: linear-gradient(to right, transparent, #ffffff);
+  .above-gradient {
     position: absolute;
-    left: calc(100% - 45px);;
-    z-index: 2;
+    left: calc(100% - 45px);
+
+    display: inline-block;
+    width: calc((100% - 45px) * (var(--progress) - 1));
+    max-width: 45px;
+    height: 100%;
+
+    background: linear-gradient(to right, var(--progress-above-color), transparent);
+    z-index: 1;
   }
 </style>

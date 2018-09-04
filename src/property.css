@@ -1,8 +1,10 @@
 * {
-	--progress-height: 5px;
-	--progress-below-color: #9e9e9e;
-	--progress-below-light-color: #e0e0e0;
-	--progress-satisfied-color: #00C853;
-	--progress-satisfied-light-color: #b9f6ca;
-	--progress-above-color: #f44336;
+  --progress-height: 5px;
+  --progress-below-color: #9e9e9e;
+  --progress-below-light-color: #e0e0e0;
+  --progress-satisfied-color: #00C853;
+  --progress-satisfied-light-color: #b9f6ca;
+  --progress-above-color: #f44336;
+
+  --viewer-report-block-bg-color: #e1f5fe;
 }

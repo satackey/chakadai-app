@@ -1,20 +1,49 @@
 <template>
   <div>
-      <div class="report-date">
+      <div class="date">
         {{ report.date }}
       </div>
-      <div class="report-summary">
-        <content-progress v-bind:value="report.summary.length"></content-progress>
-        {{ report.summary }}
+      <div
+        class="paragraphs"
+        v-for="paragraph in paragraphs"
+        v-bind:key="paragraph.label"
+      >
+        <div class="info">
+          <div class="label">
+            {{ paragraph.label }}
+          </div>
+          <div class="details">
+            <content-progress
+              class="content-progress"
+              v-bind:value="paragraph.content.length"
+            ></content-progress>
+            <div class="count">
+              {{ paragraph.content.length }}
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          {{ paragraph.content }}
+        </div>
+      </div>
+      <!-- <div class="report-summary">
+        内容の要約
+        <div>
+          <content-progress v-bind:value="report.summary.length"></content-progress>
+          <div class="count">{{ report.summary.length }}</div>
+          {{ report.summary }}
+        </div>
       </div>
       <div class="report-intention">
+        筆者の意図
         <content-progress v-bind:value="report.intention.length"></content-progress>
         {{ report.intention }}
       </div>
       <div class="report-opinion">
+        自分の意見
         <content-progress v-bind:value="report.opinion.length"></content-progress>
         {{ report.opinion }}
-      </div>
+      </div> -->
   </div>
 </template>
 
@@ -31,8 +60,78 @@ export default {
 
     };
   },
+  computed: {
+    paragraphs () {
+      return [
+        {
+          label: '内容の要約',
+          content: this.report.summary,
+        },
+        {
+          label: '筆者の意図',
+          content: this.report.intention,
+        },
+        {
+          label: '自分の意見',
+          content: this.report.opinion,
+        },
+      ];
+    },
+  },
   components: {
     ContentProgress,
   },
 };
 </script>
+
+<style scoped>
+  .date, .label {
+    color: #616161;
+  }
+  .info {
+    position: relative;
+    height: 25px;
+  }
+
+  .label {
+    display: block;
+    position: absolute;
+    width: 90px;
+    height: 100%;
+  }
+
+  .details {
+    display: block;
+    position: absolute;
+    width: calc(100% - 90px);
+    height: 100%;
+    right: 0;
+  }
+
+  .content-progress {
+    margin-top: auto;
+    margin-bottom: auto;
+    z-index: 0;
+  }
+
+  .count {
+    position: absolute;
+    margin-right: 0;
+    margin-left: auto;
+    display: block;
+    width: 45px;
+    top: 0;
+    right: 0;
+    text-align: right;
+    z-index: 1;
+  }
+
+  .content {
+    position: relative;
+    width: calc(100% - 30px);
+    top: 0;
+    left: 20px;
+    height: auto;
+    word-wrap: break-word;
+  }
+</style>

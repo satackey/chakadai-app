@@ -1,7 +1,7 @@
 <template>
   <div class="input-block">
     <div class="label">{{ title }}</div>
-    <content-progress v-bind:value="value.length"></content-progress>
+    <content-progress class="content-progress" v-bind:value="value.length"></content-progress>
     <textarea
       class="input"
       v-bind:value="value"
@@ -56,6 +56,10 @@ export default {
 <style scoped>
   .label {
     position: relative;
+  }
+
+  .content-progress {
+    margin: 10px 5px;
   }
 
   .input {
