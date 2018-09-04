@@ -26,24 +26,6 @@
           {{ paragraph.content }}
         </div>
       </div>
-      <!-- <div class="report-summary">
-        内容の要約
-        <div>
-          <content-progress v-bind:value="report.summary.length"></content-progress>
-          <div class="count">{{ report.summary.length }}</div>
-          {{ report.summary }}
-        </div>
-      </div>
-      <div class="report-intention">
-        筆者の意図
-        <content-progress v-bind:value="report.intention.length"></content-progress>
-        {{ report.intention }}
-      </div>
-      <div class="report-opinion">
-        自分の意見
-        <content-progress v-bind:value="report.opinion.length"></content-progress>
-        {{ report.opinion }}
-      </div> -->
   </div>
 </template>
 
