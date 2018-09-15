@@ -1,31 +1,31 @@
 <template>
   <div>
-      <div class="date">
-        {{ report.date }}
-      </div>
-      <div
-        class="paragraphs"
-        v-for="paragraph in paragraphs"
-        v-bind:key="paragraph.label"
-      >
-        <div class="info">
-          <div class="label">
-            {{ paragraph.label }}
-          </div>
-          <div class="details">
-            <content-progress
-              class="content-progress"
-              v-bind:value="paragraph.content.length"
-            ></content-progress>
-            <div class="count">
-              {{ paragraph.content.length }}
-            </div>
+    <div class="date">
+      {{ report.date }}
+    </div>
+    <div
+      class="paragraphs"
+      v-for="paragraph in paragraphs"
+      v-bind:key="paragraph.label"
+    >
+      <div class="info">
+        <div class="label">
+          {{ paragraph.label }}
+        </div>
+        <div class="details">
+          <content-progress
+            class="content-progress"
+            v-bind:value="paragraph.content.length"
+          ></content-progress>
+          <div class="count">
+            {{ paragraph.content.length }}
           </div>
         </div>
-        <div class="content">
-          {{ paragraph.content }}
-        </div>
       </div>
+      <div class="content">
+        {{ paragraph.content }}
+      </div>
+    </div>
   </div>
 </template>
 
