@@ -4,32 +4,6 @@
     <editor-input-block title="内容の要約" v-model="summary"></editor-input-block>
     <editor-input-block title="筆者の意図" v-model="intention"></editor-input-block>
     <editor-input-block title="自分の意見" v-model="opinion"></editor-input-block>
-    <!-- <div>
-      <div class="editor-label">筆者の意図</div>
-      <editor-progress v-bind:value="editor.intention.length"></editor-progress>
-      <textarea class="editor-input" v-model="editor.intention"></textarea>
-      <span
-        class="counter"
-        v-bind:class="{
-          'length-over': isLengthOver(editor.intention),
-          'length-satisfied': isLengthSatisfied(edictor.intention),
-          'length-under': isLengthUnder(editor.intention)
-        }"
-      >{{ editor.intention.length }}</span>
-    </div>
-    <div>
-      <div class="editor-label">自分の意見</div>
-      <editor-progress v-bind:value="editor.opinion.length"></editor-progress>
-      <textarea class="editor-input" v-model="editor.opinion"></textarea>
-      <span
-        class="counter"
-        v-bind:class="{
-          'length-over': isLengthOver(editor.opinion),
-          'length-satisfied': isLengthSatisfied(editor.opinion),
-          'length-under': isLengthUnder(editor.opinion)
-        }"
-      >{{ editor.opinion.length }}</span>
-    </div> -->
     <button v-on:click="addReport()">追加</button>
   </div>
 </template>
