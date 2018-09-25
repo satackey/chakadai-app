@@ -22,8 +22,11 @@
           </div>
         </div>
       </div>
-      <div class="content">
-        {{ paragraph.content }}
+      <div
+        class="content"
+        v-text="paragraph.content"
+      >
+        <!-- {{ paragraph.content }} -->
       </div>
     </div>
   </div>
@@ -115,5 +118,6 @@ export default {
     left: 20px;
     height: auto;
     word-wrap: break-word;
+    white-space: pre-wrap;
   }
 </style>
