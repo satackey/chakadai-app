@@ -5,6 +5,9 @@
       v-on:changed="saveEditingReport"
       v-on:add="addReport($event)"
     ></editor>
+    <downloader
+      v-bind:reports="reports"
+    ></downloader>
     <report-viewer v-bind:reports="reports"></report-viewer>
   </div>
 </template>
@@ -15,6 +18,7 @@
 
 <script>
 import Editor from '@/components/editor';
+import Downloader from '@/components/Downloader';
 import ReportViewer from '@/components/ReportViewer';
 
 if (typeof sessionStorage === 'undefined') {
@@ -76,6 +80,7 @@ export default {
   },
   components: {
     Editor,
+    Downloader,
     ReportViewer,
   },
 };
