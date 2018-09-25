@@ -1,24 +1,24 @@
 <template>
   <div class="editor">
     <input type="date" v-model="date">
-    <editor-input-block
+    <inputter
       title="内容の要約" v-model="summary"
       v-on:input="changed"
-    ></editor-input-block>
-    <editor-input-block
+    ></inputter>
+    <inputter
       title="筆者の意図" v-model="intention"
       v-on:input="changed"
-    ></editor-input-block>
-    <editor-input-block
+    ></inputter>
+    <inputter
       title="自分の意見" v-model="opinion"
       v-on:input="changed"
-    ></editor-input-block>
+    ></inputter>
     <button v-on:click="addReport()">追加</button>
   </div>
 </template>
 
 <script>
-import EditorInputBlock from '@/components/EditorInputBlock';
+import Inputter from '@/components/Editor/Inputter';
 
 function formatDate (date) {
   const d = new Date(date);
@@ -64,7 +64,7 @@ export default {
     },
   },
   components: {
-    EditorInputBlock,
+    Inputter,
   },
 };
 </script>

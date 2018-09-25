@@ -30,10 +30,10 @@
 </template>
 
 <script>
-import ContentProgress from '@/components/ContentProgress';
+import ContentProgress from '@/components/Common/ContentProgress';
 
 export default {
-  name: 'ReportViewerReportBlock',
+  name: 'Report',
   props: [
     'report',
   ],

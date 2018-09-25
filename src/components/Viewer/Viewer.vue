@@ -1,19 +1,19 @@
 <template>
   <div class="report-viewer">
-    <content-block
+    <report
       class="report"
       v-for="report in reversedReports"
       v-bind:key="report.id"
       v-bind:report="report"
-    ></content-block>
+    ></report>
   </div>
 </template>
 
 <script>
-import ContentBlock from '@/components/ReportViewerContentBlock';
+import Report from '@/components/Viewer/Report';
 
 export default {
-  name: 'ReportViewer',
+  name: 'Viewer',
   props: [
     'reports',
   ],
@@ -23,7 +23,7 @@ export default {
     },
   },
   components: {
-    ContentBlock,
+    Report,
   },
 };
 </script>

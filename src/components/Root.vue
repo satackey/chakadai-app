@@ -5,7 +5,7 @@
       v-on:changed="saveEditingReport"
       v-on:add="addReport($event)"
     ></editor>
-    <report-viewer v-bind:reports="reports"></report-viewer>
+    <viewer v-bind:reports="reports"></viewer>
   </div>
 </template>
 
@@ -14,8 +14,8 @@
 </style>
 
 <script>
-import Editor from '@/components/editor';
-import ReportViewer from '@/components/ReportViewer';
+import Editor from '@/components/Editor/Editor';
+import Viewer from '@/components/Viewer/Viewer';
 
 if (typeof sessionStorage === 'undefined') {
   window.alert('このブラウザでは使えません!');
@@ -76,7 +76,7 @@ export default {
   },
   components: {
     Editor,
-    ReportViewer,
+    Viewer,
   },
 };
 </script>
