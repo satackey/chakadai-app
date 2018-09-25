@@ -1,9 +1,18 @@
 <template>
   <div class="editor">
     <input type="date" v-model="date">
-    <editor-input-block title="内容の要約" v-model="summary"></editor-input-block>
-    <editor-input-block title="筆者の意図" v-model="intention"></editor-input-block>
-    <editor-input-block title="自分の意見" v-model="opinion"></editor-input-block>
+    <editor-input-block
+      title="内容の要約" v-model="summary"
+      v-on:input="changed"
+    ></editor-input-block>
+    <editor-input-block
+      title="筆者の意図" v-model="intention"
+      v-on:input="changed"
+    ></editor-input-block>
+    <editor-input-block
+      title="自分の意見" v-model="opinion"
+      v-on:input="changed"
+    ></editor-input-block>
     <button v-on:click="addReport()">追加</button>
   </div>
 </template>
@@ -26,19 +35,27 @@ function formatDate (date) {
 export default {
   name: 'Editor',
   props: [
-    'editor',
+    'editing',
   ],
   data () {
     return {
       date: formatDate(new Date()),
-      summary: '',
-      intention: '',
-      opinion: '',
+      summary: this.editing.summary,
+      intention: this.editing.intention,
+      opinion: this.editing.opinion,
     };
   },
   methods: {
     addReport () {
       this.$emit('add', {
+        date: this.date,
+        summary: this.summary,
+        intention: this.intention,
+        opinion: this.opinion,
+      });
+    },
+    changed () {
+      this.$emit('changed', {
         date: this.date,
         summary: this.summary,
         intention: this.intention,

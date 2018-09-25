@@ -1,6 +1,10 @@
 <template>
   <div>
-    <editor v-on:add="addReport($event)"></editor>
+    <editor
+      v-bind:editing="getEditingReport"
+      v-on:changed="saveEditingReport"
+      v-on:add="addReport($event)"
+    ></editor>
     <report-viewer v-bind:reports="reports"></report-viewer>
   </div>
 </template>
@@ -22,7 +26,12 @@ if (localStorage.getItem('chakadaiApp-reports') === null) {
 }
 
 if (localStorage.getItem('chakadaiApp-editing') === null) {
-  localStorage.setItem('chakadaiApp-editing', '{}');
+  localStorage.setItem('chakadaiApp-editing', JSON.stringify({
+    date: '',
+    summary: '',
+    intention: '',
+    opinion: '',
+  }));
 }
 
 function randStr (len) {
@@ -54,6 +63,15 @@ export default {
       localStorage.setItem('chakadaiApp-reports', JSON.stringify(reports));
 
       this.reports.push(report);
+    },
+    saveEditingReport (report) {
+      report.id = randStr(8);
+      localStorage.setItem('chakadaiApp-editing', JSON.stringify(report));
+    },
+  },
+  computed: {
+    getEditingReport () {
+      return JSON.parse(localStorage.getItem('chakadaiApp-editing'));
     },
   },
   components: {
