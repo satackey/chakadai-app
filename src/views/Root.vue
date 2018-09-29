@@ -1,9 +1,9 @@
 <template>
   <div>
     <editor
-      v-bind:editing="getEditingReport"
+      v-bind:value="this.editingReport"
       v-on:changed="saveEditingReport"
-      v-on:add="addReport($event)"
+      v-on:add="addReport()"
     ></editor>
     <downloader
       v-bind:reports="reports"
@@ -21,21 +21,20 @@ import Editor from '@/components/Editor/Editor';
 import Downloader from '@/components/Downloader/Downloader';
 import Viewer from '@/components/Viewer/Viewer';
 
+function formatDate (date) {
+  const d = new Date(date);
+  let month = String(d.getMonth() + 1);
+  let day = String(d.getDate());
+  let year = d.getFullYear();
+
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+  // eslint-disable-next-line
+  return [year, month, day].join('-');
+}
+
 if (typeof sessionStorage === 'undefined') {
   window.alert('このブラウザでは使えません!');
-}
-
-if (localStorage.getItem('chakadaiApp-reports') === null) {
-  localStorage.setItem('chakadaiApp-reports', '[]');
-}
-
-if (localStorage.getItem('chakadaiApp-editing') === null) {
-  localStorage.setItem('chakadaiApp-editing', JSON.stringify({
-    date: '',
-    summary: '',
-    intention: '',
-    opinion: '',
-  }));
 }
 
 function randStr (len) {
@@ -56,27 +55,46 @@ export default {
   name: 'Root',
   data () {
     return {
-      reports: JSON.parse(localStorage.getItem('chakadaiApp-reports')),
+      editingReport: {
+        date: formatDate(new Date()),
+        summary: '',
+        intention: '',
+        opinion: '',
+      },
+      reports: []
     };
   },
   methods: {
-    addReport (report) {
-      report.id = randStr(8);
-      const reports = JSON.parse(localStorage.getItem('chakadaiApp-reports'));
-      reports.push(report);
-      localStorage.setItem('chakadaiApp-reports', JSON.stringify(reports));
-
-      this.reports.push(report);
+    addReport () {
+      this.reports.push({
+        ...this.editingReport,
+        ...{ id: randStr(8) }
+      });
+      this.editingReport = {
+        date: formatDate(new Date()),
+        summary: '',
+        intention: '',
+        opinion: '',
+      };
     },
     saveEditingReport (report) {
-      report.id = randStr(8);
-      localStorage.setItem('chakadaiApp-editing', JSON.stringify(report));
+      this.editingReport = report;
     },
   },
-  computed: {
-    getEditingReport () {
-      return JSON.parse(localStorage.getItem('chakadaiApp-editing'));
+  mounted () {
+    this.editingReport = {
+      ...this.editingReport,
+      ...JSON.parse(localStorage.getItem('chakadaiApp-editing'))
+    }
+    this.reports = JSON.parse(localStorage.getItem('chakadaiApp-reports')) || [];
+  },
+  watch: {
+    editingReport (report) {
+      localStorage.setItem('chakadaiApp-editing', JSON.stringify(report));
     },
+    reports (reports) {
+      localStorage.setItem('chakadaiApp-reports', JSON.stringify(reports));
+    }
   },
   components: {
     Editor,
