@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div v-if="isReportEmpty">何もありません</div>
     <viewer
       v-bind:reports="reports"
       v-bind:showDetails="false"></viewer>
@@ -18,6 +19,11 @@ export default {
   },
   mounted () {
     this.reports = JSON.parse(localStorage.getItem('chakadaiApp-reports')) || []
+  },
+  computed: {
+    isReportEmpty () {
+      return this.reports.length === 0
+    }
   },
   watch: {
     reports (reports) {
