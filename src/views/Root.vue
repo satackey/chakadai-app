@@ -8,6 +8,8 @@
     <downloader
       v-bind:reports="reports"
     ></downloader>
+    <br>
+    <router-link to="/print">印刷</router-link>
     <viewer v-bind:reports="reports"></viewer>
   </div>
 </template>

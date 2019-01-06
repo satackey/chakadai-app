@@ -12,7 +12,7 @@
         <div class="label">
           {{ paragraph.label }}
         </div>
-        <div class="details">
+        <div class="details" v-if="isDetailShowed">
           <content-progress
             class="content-progress"
             v-bind:value="paragraph.content.length"
@@ -39,6 +39,7 @@ export default {
   name: 'Report',
   props: [
     'report',
+    'showDetails'
   ],
   data () {
     return {
@@ -62,6 +63,9 @@ export default {
         },
       ];
     },
+    isDetailShowed () {
+      return this.showDetails == null ? true : this.showDetails
+    }
   },
   components: {
     ContentProgress,

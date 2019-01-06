@@ -5,6 +5,7 @@
       v-for="report in reversedReports"
       v-bind:key="report.id"
       v-bind:report="report"
+      v-bind:showDetails="showDetails"
     ></report>
   </div>
 </template>
@@ -16,6 +17,7 @@ export default {
   name: 'Viewer',
   props: [
     'reports',
+    'showDetails'
   ],
   computed: {
     reversedReports () {
